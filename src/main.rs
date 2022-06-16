@@ -89,7 +89,7 @@ fn debug_check1(serial: &mut dyn uWrite<Error = Void>) {
 //
 
 /*
-cargo build --release --features atmega328p --target ../avr-specs/avr-atmega328p.json &&
+cargo build --release
 elf=$(echo target/avr-atmega328p/release/*.elf) &&
 avrdude -C /etc/avrdude.conf -v -p atmega328p -c arduino -P /dev/ttyACM0  -D -Uflash:w:$elf:e
  */
