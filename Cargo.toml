@@ -11,7 +11,20 @@ atmega2560 = [ "arduino-hal/arduino-mega2560", "arduino-spi/atmega2560"]
 atmega328p = [ "arduino-hal/arduino-uno", "arduino-spi/atmega328p"]
 
 [[bin]]
-name = "rust-avr-explosion"
+name="rust-avr-explosion"
+path="src/main.rs"
+test = false
+bench = false
+
+[[bin]]
+name="good"
+path="src/good.rs"
+test = false
+bench = false
+
+[[bin]]
+name="bad"
+path="src/bad.rs"
 test = false
 bench = false
 
