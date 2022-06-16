@@ -1,0 +1,54 @@
+[package]
+name = "rust-avr-explosion"
+version = "0.1.0"
+authors = ["Robert Forsman <git@thoth.purplefrog.com>"]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+
+[features]
+default=["atmega328p"]
+atmega2560 = [ "arduino-hal/arduino-mega2560", "arduino-spi/atmega2560"]
+atmega328p = [ "arduino-hal/arduino-uno", "arduino-spi/atmega328p"]
+
+[[bin]]
+name = "rust-avr-explosion"
+test = false
+bench = false
+
+[dependencies]
+panic-halt = "0.2.0"
+ufmt = "*"
+#rand = {version="*", default-features=false, features=["small_rng"]}
+embedded-hal="*"
+byte-slice-cast = { version="*", default-features = false }
+
+[dependencies.arduino-spi]
+git="https://github.com/mutantbob/arduino-spi.git"
+#path="../../arduino-spi"
+
+[dependencies.avr-hal-generic]
+git = "https://github.com/rahix/avr-hal"
+rev = "d0d2f243bd3e10b49f6a78d44839a6caa8be7d43"
+#rev = "f84c0dff774c2292bc932b670955165161ecc7d1"
+
+[dependencies.arduino-hal]
+git = "https://github.com/rahix/avr-hal"
+rev = "d0d2f243bd3e10b49f6a78d44839a6caa8be7d43"
+#rev = "f84c0dff774c2292bc932b670955165161ecc7d1"
+
+# Configure the build for minimal size - AVRs have very little program memory
+[profile.dev]
+panic = "abort"
+lto = true
+opt-level = "z"
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+debug = true
+lto = true
+opt-level = "z"
+
+
+[patch.crates-io]
+ufmt = { git = "https://github.com/mutantbob/ufmt.git", branch="hex_support" }
